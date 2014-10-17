@@ -1,0 +1,59 @@
+General Feedback
+================
+
+The system is very easy to use and the design is very clear. It seems to be working reliably, I have not been able to find any real issues. Well done.
+
+One thing that could be improved, though, is that the visualisation on the screen does not change immediately after a button press, so the user may not realise a request is being processed. Some form of progress indicator (spinning wheel?) would have been good here.
+
+The code is generally well written and quite easy to read. This is the case for all the three parts. There are some points where improvements would be good, so I am pointing them out below. My intention here is not to be pedantic but to sensitise you to importance of clean coding practices so you can write even better code in the future. I also point out good practices that I find (e.g., the use of JSDoc comments) so that people who have not made them a habit yet can pick them up.
+
+Overall, I am impressed with the results you have been able to achieve despite problems with the APIs that I suggested. I think this assignment serves as a testament for how far the class has managed to progress in a short time. I hope that CS5003 has helped you all to prepare for the dissertations and I really look forward to the poster presentations at the end of the Summer to see even more great work.
+
+Mashup Functionality
+--------------------
+I was hoping that you would find more interesting ways to bring together data from different sources. I gather from Thomas' report that you did try to do this but were constrained by limitations of the APIs. Stefan V. has included examples of URLs as has Jairus. I tried them and they did return the same data for Afghanistan and the US. Clearly, something is wrong there. Xiao also commented on the API and how it seemed to change over time. On the one hand this is a useful experience for you but on the other it is a shame that you did not get to fulfill all your ambitions for the project. Perhaps working with the static download and importing 
+it into Mongo would have helped but then it would have changed the nature of the exercise somewhat.
+
+kivaServer.js
+-------------
+I think you have chosen the timeout for the caching a bit too generously. A lot can change in 2 days. One possible way of dealing with this would be to have an update process that writes to MongoDB. Because JavaScript does not support multiple threads this would have had to be implemented as a separate process. Not ideal, I know.
+
+Try to avoid lengthy constructs such as responseBody[att][0].data[1].length by assigning intermediate values to variables with discriptive names. This would perhaps also make clear what globalGDPStandardise() is about. Also, it is not clear without looking at accessAPI() that the [att][0].data part of the expression has no correspondence in the data returned by the Worldbank API - I banged my head against this for a while - but is an artefact of the response caching in MongoDB. 
+
+Arguably a better way to model the cached results is to either deliberately expose the caching at the point of use. Alternatively, put the extraction ot the Worldback data from the caching structure into the accessAPI() function so it returns what the server returns, thus reducing the potential for confuction.
+
+The accessAPI function could be made more readable by separating the MongoDB from the web service code. That way the logic of the caching mechanism would stand out much better from the details of the code.
+
+In the comment for parseMapData(), you say that the data is converted "into the correct format" but it is not immediately clear what the input and output formats are or why the conversion should be necessary.
+
+It seems that functionality to provide data for multiple years for the GDP has ended up on the client side. This is something that should have been implemented in the server to provide the client with a clean REST-ful interface.
+
+kivaClient.js
+-------------
+The way you initialise the button onclick functions is a bit confusing:
+
+$(function(){ ... })
+
+My eyes focused on the function(){} part and I expected to see an invocation at the end of the function definition but there was none. So, I scanned back to the top to realise that jQuery would execute the anonymous function. In my opinion it is better to name functions and then have an initialisation function that calls then, which in turn is executed with the $(function) mechanism.
+
+In the callback for #GlobalGDPVSKivaLoans, it first seemed to me that you had a potential for a race condition because you are relying on the calls to the World Bank API to return before you call callKivaTotalLoans(). A chat with Thomas clarified that the "async: false" option resolves this issue, although at the cost of temporarily freezing the browser. In general, assume that a call can take any amount of time and that it is not safe to use a sequence of instructions but only a callback. So, instead of the for loop, you should use a function that passes itself in as a callback, then utilise a counter variable to end this recursive process when all calls are made. This is the nature of event-driven programming in JavaScript. 
+
+The kivaClient script is quite long. Clearly, a lot of work has gone into this part of the project. However, it also means that the code should probably have been split into multiple files, especially since parts of it are more generally reusable.
+
+The final part in the file seems a bit odd. You are asking jQuery to call an anonymous function which references the kivaClient variable but does not actually do anything with it. Did you mean to add an initialisation function? This is not needed because the callback registration functions are executed by jQuery as they are all registered for executing using the $ function. The client is drive entirely by the UI events, so nothing else is needed.
+
+maps.js
+-------
+Good choice to use Google's geochart function for mapping the data. While in principle it would be possible to do the same with Google Maps, I believe this would require a source of shape information for different countries. Geochart provides a one-stop-shop solution.
+
+It is a shame that the Kiva API had not worked as I would have expected. The solution to work with the list of new loans is workable but the data will fluctuate a lot, so not sure how meaningful it is, except perhaps for someone looking for loans? Anyway, I am glad you found a way around the API problems.
+
+You are using the $(function()...) construct a number of times to execute anonymous functions. In my opinion it would be better to name the functions and to call them from an initialisation function that is in turn run through the $ function. One advantage is that the function names will aid in navigating the code. The same holds for callbacks in Ajax calls. Giving them names is an easy way to document the code and to reduce the level of nesting of the code.
+
+Try to place import statements (loading Google libraries) together at the top of the file. This convention makes it easy for the reader to find them. This is particularly important since there is no one way in JavaScript to import libraries and the functionality is potentially split over the HTML and JavaScript already.
+
+I note that some of the functions have structured comments. I assume these are for JSDoc? These are very useful, especially since functions do not have typed parameters and return values. If you are not using JSDoc in your own code then please try to make it a habit. 
+
+There does seem to be a fair bit of repetition in the functions calculating totals and preparing tables. Some refactoring might reduce the code size and lead to better readability here as well.
+
+I am not sure I understand the comment "function to return integers that will scale the map" on filterDataValue. It seems to weed out integers that are out of a defined range, replacing them with -1?
