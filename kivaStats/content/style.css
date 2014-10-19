@@ -1,0 +1,215 @@
+body{
+	font-family: Helvetica;
+	color: #291D1E;
+	margin:0;
+}
+
+#header{
+	background: #ffffff;
+    border-bottom: 2px solid #00cc00;
+    height: 3em;
+	line-height: 3em;
+    left: 0;
+	right: 0;
+	top: 0;
+    position: fixed;
+	display: inline-block;
+	z-index: 10;
+}
+
+#headerLogoTitle{
+	margin-left: 1em;
+	float:left;
+	margin-right: 2em;
+}
+
+#logo{
+	height: 2em;
+	width: 2em;
+	vertical-align: middle;	
+}
+
+#headerTitle{
+	font-size: 2em;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+#headerLinks{
+	margin-right:auto;
+	margin-left:auto;
+}
+
+.headerText{
+	float: left;
+	margin: 0 0.5em;
+	transition: color .5s;
+	text-decoration:none;
+	color: #291D1E;
+	font-size: 1.5em;
+}
+
+.headerText:hover{
+	cursor: pointer;
+	color: #00cc00;
+}
+
+#main{
+	margin-top: 4em;
+}
+
+#welcome{
+	margin-left:auto;
+	margin-right:auto;
+	width: 70%;
+	font-size:2.5em;
+	font-weight:bold;
+	text-align:center;
+}
+
+.titleText{
+	font-weight:bold;
+}
+
+.mainSection{
+	clear: both;
+	border-bottom: 2px solid black;
+	padding: 2em 1em 1em 1em;
+	margin-top: -3em;
+	overflow:hidden;
+}
+
+.optionsDiv{
+	float:left;
+	width: 20%;
+}
+
+.button{
+	float:left;
+	clear:left;
+	margin-bottom: 0.5em;
+	background-color: #ffffff;
+	border: thin solid #291D1E;
+	color: #291D1E;
+	width: 250px;
+}
+
+.button:hover{
+	background-color: #e0e0e0 !important;
+	cursor: pointer;
+}
+
+.button:active{
+	background-color: #00cc00 !important;
+}
+
+.contentDiv{
+	float:left;
+	margin-left: 5em;
+	width:70%;
+}
+
+#table{
+	border: 1px solid #e0e0e0;
+	border-collapse: collapse;
+}
+
+#table thead{
+	text-align:left;
+}
+
+#table tbody{
+	font-size: 0.8em;
+}
+
+#table td{
+	padding-right: 1em;
+}
+
+#selectDiv{
+	margin-top: 1em;
+	padding: 0.5em;
+	border: 1px solid black;
+	float: left;
+}
+
+#submitOptions{
+	margin-top: 0.5em;
+}
+
+#chartsDivContent svg{
+	border: 1px solid #D3D3D3;
+}
+
+.barAxis text{
+	font-size: 0.8em;
+}
+
+.barAxis path{
+	fill:none;
+}
+
+.axis path,
+.axis line,
+.axis0 path,
+.axis0 line,
+.axisRight path,
+.axisRight line{
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.axis text,
+.axis0 text,
+.axisRight text{
+	font-size: 0.8em;
+}
+
+.axisRight text{
+	fill: orange;
+}
+
+#chartsDivContentArea svg{
+	float:left;
+}
+
+
+
+.x.axis path{
+	display: none;
+}
+
+.line{
+	fill: none;
+	stroke: #00cc00;
+	stroke-width: 1.5px;
+}
+
+.line2{
+	fill: none;
+	stroke: #ff9900;
+	stroke-width: 1.5px;
+}
+
+div.tooltip {
+	position: absolute;
+	text-align: center;
+	width: 30;
+	border: 1px solid black;
+	height: 28px;
+	padding: 2px;
+	background: #ffffff;
+	font-size: 0.8em;
+	pointer-events: none;
+} 
+
+#mapChartDiv{
+	width: 600px;
+	height: 500px;
+}
+
+#dataTable{
+	width: 300px;
+	height: 300px;
+}
