@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>KivaStats</title>
+
+	<!-- Load the jQuery library. -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
+	<!-- Load the jQuery UI library. -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	
+	<!-- Load the D3 library. -->
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	
+	<!-- Load the client-side controller JS file.-->
+	<script type="text/javascript" src="kivaClient.js"></script>
+
+	<!-- Load the jQuery UI Mint-Choc theme CSS file. -->
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/mint-choc/jquery-ui.min.css">
+	
+	<!-- Load the CSS file. -->
+	<link type="text/css" rel="stylesheet" href="style.css">
+	
+	<!-- Load titleIcon -->
+	<link rel="icon" type="image/png" href="barGraph.png">
+	
+	<!-- Load Maps JavaScript file and Google functionality -->
+	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type='text/javascript' src='map.js'></script>
+</head>
+
+<body>
+	<div id="header">
+		<div id="headerLogoTitle">
+			<img src="barGraph.png" alt="Logo" id="logo"></span>
+			<span id="headerTitle">KivaStats</span>
+		</div>
+		<div id="headerLinks">
+			<a href="#tablesDiv"class="headerText">Tables</a>
+			<a href="#chartsDiv" class="headerText">Charts</a>
+			<a href="#mapsDiv" class="headerText">Maps</a>
+		</div>
+	</div>
+	
+	<div id="main">
+		<p id="welcome">Welcome to KivaStats. Please choose the data you want to display above.</p>
+		
+		<div id="tablesDiv" class="mainSection" hidden>
+			<h1>Tables</h1>
+			
+			<div id="tablesDivOptions" class="optionsDiv">
+				<button type="button" class="button" id="newestLoansButton">Newest loans</button>
+				<button type="button" class="button" id="newestLendersButton">Newest lenders</button>
+			</div>
+			
+			<div id="tablesDivContent" class="contentDiv">
+				<p class="titleText"></p>
+				<table id="table"></table>
+			</div>
+		</div>
+		
+		<div id="chartsDiv"  class="mainSection" hidden>
+			<h1>Charts</h1>
+			<div id="chartsDivOptions" class="optionsDiv">
+				<button type="button" class="button" id="LenderGenderButton">Lenders by gender</button>
+				<button type="button" class="button" id="LoansTotalYearButton">Total loans per year</button>
+				<button type="button" class="button" id="AvgLoanEntrepYearButton">Average loan per enterprise per year</button>
+				<button type="button" class="button" id="NumberLendersYearButton">Number of lenders per year</button>
+				<button type="button" class="button" id="AvgLoanLenderYearButton">Average loan per lender per year</button>
+				<button type="button" class="button" id="GDPPerYear">Global GDP per year</button>
+				<button type="button" class="button" id="GlobalGDPVSKivaLoans">Global GDP and kiva total loans</button>
+			</div>
+			
+			<div id="chartsDivContent" class="contentDiv">
+				<p class="titleText"></p>
+				<div id="chartsDivContentArea"></div>
+			</div>
+			
+		</div>
+		
+		<div id="mapsDiv"  class="mainSection" hidden>
+			<h1>Maps</h1>
+			<div id="mapsDivOptions" class="optionsDiv">
+				<button type="button" id="GDPMapBttn" class="button">GDP</button>
+				<button type="button" id="PopulationMapBttn" class="button">Population</button>
+				<button type="button" id="CapitaMapBttn" class="button">GDP per Capita</button>
+				<button type="button" id="newestLoadBttn" class="button">Newest 500 loans (count)</button>
+				<button type="button" id="totalNewLoadBttn" class="button">Total of newest 500 loans</button>
+			</div>
+			<div id="mapsDivContent" class="contentDiv">
+				<p class="titleText"></p>
+				<table>
+					<tr>
+						<td>
+							<div id="mapChartDiv"></div>
+						</td>
+						<td>
+							<div id="dataTable"></div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+</html> 
