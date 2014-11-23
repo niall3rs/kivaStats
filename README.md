@@ -1,4 +1,4 @@
 kivaStats
 =========
 
-Data visualisation of Kiva loans. Completed as a practical during MSc at St Andrews
+Data visualisation of Kiva Microfunds. Completed as a team project during MSc at St Andrews
